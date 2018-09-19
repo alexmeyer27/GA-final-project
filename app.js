@@ -18,7 +18,7 @@ var recipeSearch = function(searchTerm){
 	})
 }
 
-recipeSearch();
+recipeSearch("pasta");
 
 //success function creates object and inserts as html (to be created)
 
