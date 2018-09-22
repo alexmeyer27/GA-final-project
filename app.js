@@ -49,9 +49,9 @@ var recipeSearch = function(searchTerm){
 			var recipeTemplate = 
 			"<div class = 'recipe'><h3>" + recipeTitle + "</h3>" + 
 			"<h5>" + author + "</h5>" 
-			+ "<a ref = " + recipeURL + ">Source</a>" 
+			+ "<a href = " + recipeURL + ">Source</a>" 
 			+ "<img src = " + imageURL + ">" 
-			+ "<i class='far fa-bookmark' onclick = 'bookmark(this)'></i></div>" 
+			+ "<i class='far fa-bookmark' onclick = 'bookmark(this)'></i></div>"; 
 
 				
 			//appending each article after the search bar
@@ -83,14 +83,15 @@ function bookmark(bookmarkElement) {
 
 	var parentElementHelper = $(event.target).parent();
 
-	var recipeTitle = $(parentElementHelper > "h3").val(),
-		recipeURL = $(parentElementHelper > "a").val();
+	var recipeTitle = parentElementHelper.children("h3"),
+		recipeURLHelper = parentElementHelper.children("a"),
+		recipeURL = recipeURLHelper.attr("href");
 
-	var recipeHTML = `<a href=${recipeURL}>${recipeTitle}</a>`
+	var recipeHTML = `<a href=${recipeURL}>${recipeTitle.text()}</a>`;
 
 	recipeDatabaseReference.push({
 		recipeHTML: recipeHTML
-	})
+	});
 
 	//change bookmark icon
     $(event.target).after('<i class="fas fa-bookmark"></i>');
@@ -100,7 +101,7 @@ function bookmark(bookmarkElement) {
 
 
 //ability to manually add recipe by url (less information when adding this way)
-function addRecipeByURL(recipeTitle) {
+function addRecipeByURL() {
 
 	//input element variables 
 	var recipeTitleInput = $("#recipe-add-title"),
@@ -111,7 +112,7 @@ function addRecipeByURL(recipeTitle) {
 	var recipeTitle = recipeTitleInput.val(),
 		recipeURL = recipeURLInput.val();
 
-	var recipeHTML = `<a href=${recipeURL}>${recipeTitle}</a>`
+	// var recipeHTML = `<a href=${recipeURL}>${recipeTitle}</a>`
 
 	//event listener for button/input
 	manualAddButton.click( function (){
