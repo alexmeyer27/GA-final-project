@@ -52,11 +52,12 @@ p {
 }
 
 button {
-	background-color: #B8EFFF;
-	margin: .5em;
-	padding: .5em;
-	text-align: center;
-	font-size: 1em;
+	background-color: #1f1a1c;
+    margin: .5em;
+    padding: .5em;
+    text-align: center;
+    font-size: 1em;
+    color: #FEFEFA;
 }
 
 header {
@@ -117,6 +118,14 @@ input {
 	margin: auto;
 }
 
+img {
+	border-radius: 50%;
+	border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+}
+
 .wrapper {
 	width: 100%;
 }
@@ -147,7 +156,7 @@ input {
 }
 
 
-#quick_plan {
+#recipe_search {
 	float: left;
 	text-align: center;
 /*	display: inline-block;
@@ -156,7 +165,7 @@ input {
 	margin: auto;
 }
 
-#quick_plan_form {
+#recipe_search_form {
 	padding: 2em;
 	background-color: #B8EFFF;
 	color: #1f1a1c;
@@ -187,7 +196,7 @@ input {
 }
 
 @media screen and (max-width: 1201px) {
-	.next_steps, #walkthrough, #quick_plan {
+	.next_steps, #walkthrough, #recipe_search {
 		float: none;
 		padding: 1em;
 	}
@@ -228,11 +237,11 @@ input {
 		display: none;
 	}
 
-	#quick_plan {
+	#recipe_search {
 		width: 100%;
 	}
 
-	#quick_plan_form > input {
+	#recipe_search_form > input {
 		width: 60%;
 	}
 }
@@ -242,13 +251,9 @@ input {
 		display: none;
 	}
 
-	#quick_plan_form {
+	#recipe_search_form {
 		width: 100%;
 	}
-
-/*	#quick_plan_form > input {
-		width: 85%;
-	}*/
 
 	.explore {
 	width: 100%;

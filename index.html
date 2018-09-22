@@ -4,6 +4,7 @@
 	<head>
 		<title>My Cookbook</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!--[if lt IE 9]>
             <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
@@ -22,20 +23,29 @@
 				<h3 id="explore_tag">Search for a recipe below or browse the tagged recipes in the cookbooks with <a href="#">browse</a>.</h3>
 			</div>
 			<div class="next_steps clearfix">
-				<section class = "clearfix" id="quick_plan">
-					<form id="quick_plan_form">
+				<section class = "clearfix" id="recipe_search">
+					<form id="recipe_search_form">
 						<h2 id= "quick_plan_header">Recipe Search</h2>
 						<br>
-						Search<br>
- 						<input type="text" id="invitees" name="invitees">
+						Recipe Search<br>
+ 						<input type="text" id="recipe-search" name="recipeSearch">
+ 						<button id = 'submit-button'>Submit</button>
   						<br>
   						<br>
 					</form>
 				</section>
+				<section class = "manual_recipe clearfix">
+					<h2 id= "quick_plan_header">Recipe Add</h2>
+					<input type="text" id="recipe-add-title" name="recipeAddTitle">
+					<input type="text" id="recipe-add-url" name="recipeAddURL">
+					<button id = 'add-button'>Add Recipe</button>
+				</section>
 			</div>
-		</div>	
+		</div>
+		<script src="https://www.gstatic.com/firebasejs/5.5.1/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-database.js"></script>	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-      <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
-      <script src="app.js"></script>
+      	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+      	<script src="app.js"></script>
 	</body>
 </html>
