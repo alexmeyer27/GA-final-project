@@ -1,8 +1,10 @@
 //variable
 const searchBar = $('#recipe-search'),
       button = $('#submit-button'),
-      defaultBookmark = $('.far fa-bookmark');
-    
+      defaultBookmark = $('.far fa-bookmark'),
+      cookbook = $('#cookbook');
+
+var recipeList = $('#cookbook_recipes');
 
 // Initialize Firebase
  var config = {
@@ -20,6 +22,24 @@ const database = firebase.database();
 
 var recipeDatabaseReference = firebase.database().ref('recipes');
 
+database.ref('recipes').on('value', function (results) {
+  recipeList.html('');
+  let recipes = results.val();
+  console.log(recipes);
+  
+  for(var messageID in recipes){
+    console.log(messageID);
+    console.log(recipes[messageID].recipeHTML);
+    
+    let bookmarkedRecipe = document.createElement('div'),
+         recipeContent = recipes[messageID].recipeHTML;
+    
+    bookmarkedRecipe.innerHTML = `${recipeContent}`;
+    bookmarkedRecipe.setAttribute('data-id', messageID);
+    
+    recipeList.append(bookmarkedRecipe);
+  }
+});
 
 // API call using jquery AJAX, promises, functions created in global scope
 var recipeSearch = function(searchTerm){
@@ -34,7 +54,7 @@ var recipeSearch = function(searchTerm){
 			event.preventDefault();
 			console.log(result);
 			var i;
-		////success function creates html and inserts as html (to be created)
+		//success function creates html and inserts as html (to be created)
 		for (i = 0; i < result.recipes.length; i++){
 
 			var recipe = result.recipes[i];
@@ -72,9 +92,8 @@ button.click( function (){
 	event.preventDefault();
 	submitValue = searchBar.val();
 	recipeSearch(submitValue);
+	searchBar.val('');
 });
-
-
 
 //link to bookmark button that adds to firebase database
 function bookmark(bookmarkElement) { 
@@ -125,6 +144,11 @@ function addRecipeByURL() {
 }
 
 //selecting recipe book expands section of the page to show bookmarked recipes
+
+cookbook.click( function (){
+	event.preventDefault();
+	
+});
 
 
 //recipes are returned sorted alphabetically
