@@ -124,6 +124,11 @@ img {
     border-radius: 4px;
     padding: 5px;
     width: 150px;
+    display: inline;
+}
+
+.hidden {
+	visibility: hidden;
 }
 
 .wrapper {
@@ -140,10 +145,36 @@ img {
 }
 
 .next_steps {
-	padding: 4em;
+	padding: 2em;
 	background-color: #1f1a1c;
 	color: #FEFEFA;
 	margin: auto;
+	margin-bottom: 1em;
+}
+
+.manual_recipe {
+	float: right;
+	text-align: center;
+/*	display: inline-block;
+*/	width: 50%;
+	height: 100%;
+	margin: auto;
+}
+
+.recipe {
+	border: 1px solid #ccc;
+    border-radius: 4px;
+    max-width: 40%;
+    margin: auto;
+    margin-top: 1em;
+}
+
+.cookbook_anchors {
+	margin-right: 10px;
+}
+
+.recipe_display {
+	margin: 2em;
 }
 
 #toggle {
@@ -165,22 +196,57 @@ img {
 	margin: auto;
 }
 
-#recipe_search_form {
+#recipe_search_input {
+	width: 100%;
+    padding: 12px 20px;
+    margin: 28px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.recipe_search_form {
 	padding: 2em;
 	background-color: #B8EFFF;
 	color: #1f1a1c;
 	border: solid #FEFEFA .3em;
+	margin: 1em;
+}
+
+#recipe-add-title {
+	width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#recipe-add-url {
+	width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 #explore_tag {
 	text-align: center;
-	margin: 4em 0;
+	margin: 2em 0;
 	padding: 0 1em;
 }
 
+#edit_cookbook {
+	float: right;
+}
 
-#quick_plan_header {
-	max-width: 600px;
+
+.recipe_headers {
+	/*max-width: 600px;*/
 	margin: auto;
 	color: #1f1a1c;
 }

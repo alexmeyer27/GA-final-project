@@ -12,34 +12,38 @@
 	</head>
 	<body>
 		<div class="wrapper">
-			<header>
-				<label for="toggle">Menu</label>
-				<input type="checkbox" id="toggle">
-				<nav class="clearfix">
-					<a href="#" id="cookbook">My Cookbook</a>
-				</nav>
-				<ul class = "hidden" id = "cookbook_recipes"></ul>
-			</header>
+
 			<div>
 				<h3 id="explore_tag">Search for a recipe below or select My Cookbook to browse.</h3>
 			</div>
 			<div class="next_steps clearfix">
 				<section class = "clearfix" id="recipe_search">
-					<form id="recipe_search_form">
-						<h2 id= "quick_plan_header">Recipe Search</h2>
-						<br>
-						Recipe Search<br>
- 						<input type="text" id="recipe-search" name="recipeSearch">
+					<form class="recipe_search_form">
+						<h2 class= "recipe_headers">Recipe Search</h2>
+ 						<input type="text" id="recipe_search_input" name="recipeSearch" placeholder = "Search for recipes by ingredients">
  						<button id = 'submit-button'>Submit</button>
   						<br>
 					</form>
 				</section>
 				<section class = "manual_recipe clearfix">
-					<h2 id= "quick_plan_header">Recipe Add</h2>
-					<input type="text" id="recipe-add-title" name="recipeAddTitle">
-					<input type="text" id="recipe-add-url" name="recipeAddURL">
-					<button id = 'add-button'>Add Recipe</button>
+					<form class="recipe_search_form">
+						<h2 class= "recipe_headers">Add Recipe</h2>
+						<input type="text" id="recipe-add-title" name="recipeAddTitle" placeholder = "Add a title">
+						<input type="text" id="recipe-add-url" name="recipeAddURL" placeholder = "Add a url">
+						<button id = 'add-button'>Submit</button>
+					</form>
 				</section>
+			</div>
+			<div>
+				<label for="toggle">Menu</label>
+				<input type="checkbox" id="toggle">
+				<nav class="clearfix">
+					<a href="#" id="cookbook">My Cookbook</a>
+					<a href="#" class = "hidden" id = "edit_cookbook">Edit</a>
+				</nav>
+				<ul class = "hidden" id = "cookbook_recipes"></ul>
+			</div>
+			<div class = "recipe_display">
 			</div>
 		</div>
 		<script src="https://www.gstatic.com/firebasejs/5.5.1/firebase-app.js"></script>
