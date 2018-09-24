@@ -33,7 +33,6 @@ var recipeDatabaseReference = firebase.database().ref('recipes');
 database.ref('recipes').on('value', function (results) {
   recipeList.html('');
   let recipes = results.val();
-  console.log(recipes);
   
   for(var messageID in recipes){
     
@@ -58,8 +57,8 @@ var recipeSearch = function(searchTerm){
     	jsonp: false,
 		url: `https://www.food2fork.com/api/search?key=5e10831907c423a1bf607fe78627c48b&q=${searchTerm}`, 
 	 	success: function(result) {
+			console.log(result);
 			event.preventDefault();
-			// console.log(result);
 			var i;
 		//success function creates html and inserts as html (to be created)
 		for (i = 0; i < result.recipes.length; i++){
@@ -69,14 +68,17 @@ var recipeSearch = function(searchTerm){
 			var	recipeTitle = recipe.title,
 				author = recipe.publisher,
 				recipeURL = recipe.source_url,
-				imageURL = recipe.image_url;
+				imageURL = recipe.image_url,
+				recipeId = recipe.recipe_id;
 				
 			//defining article template
 			var recipeTemplate = 
-			"<div class = 'recipe'>" + "<a href=" + recipeURL + "><img src = " + imageURL + "></a>" 
-			+ "<h3>" + recipeTitle + "</h3>"
-			+ "<i class='far fa-bookmark' onclick = 'bookmark(this)'></i>"
-			+ "<h5>" + author + "</h5></div>" ; 
+			`<div class = 'recipe'>
+				<a href= ${recipeURL}><img src = ${imageURL}></a>
+				<h3>${recipeTitle}</h3>
+				<i class='far fa-bookmark' id = ${recipeId} onclick = 'bookmark(this)'><a href = '#'></a></i>
+				<h5>${author}</h5>
+			</div>`; 
 
 				
 			//appending each article after the search bar
@@ -102,25 +104,45 @@ button.click( function (){
 
 //link to bookmark button that adds to firebase database
 function bookmark(bookmarkElement) { 
-   
+   	event.preventDefault();
 	//add parent elements to database as key:value pairs
-	var parentElementHelper = $(event.target).parent();
 
+	var parentElementHelper = $(event.target).parent();
+	
 	var recipeTitle = parentElementHelper.children("h3"),
 		recipeURLHelper = parentElementHelper.children("a"),
 		recipeURL = recipeURLHelper.attr("href"),
-		messageID = null;
+		recipeId = bookmarkElement.getAttribute("id");
 
-	var recipeHTML = `<a href=${recipeURL} class = "cookbook_anchors" id = ${messageID}>${recipeTitle.text()}</a>`;
+	var recipeHTML = `<a href=${recipeURL} class = "cookbook_anchors" id = ${recipeId}>${recipeTitle.text()}</a>`;
 
 	recipeDatabaseReference.push({
-		recipeHTML: recipeHTML
+		recipeHTML: recipeHTML,
+		recipeId: recipeId
 	});
 
 	//change bookmark icon
-    $(event.target).after('<i class="fas fa-bookmark"></i>');
+    $(event.target).after(`<i class="fas fa-bookmark" onclick = "removeBookmark(this)" id = "${recipeId.toString()}"></i>`);
     bookmarkElement.remove();
 
+}
+
+function removeBookmark (element) {
+	event.preventDefault();
+
+	var parentElementHelper = $(event.target).parent();
+	var bookmarkedRecipe = element.getAttribute("id");
+
+	var ref = database.ref("recipes"),
+		recipe = ref.orderByChild('recipeId').equalTo(`${bookmarkedRecipe}`);
+    	
+    recipe.remove();
+
+	// deletedRecipe =  database.ref('recipes/' + messageID);
+ //    deletedRecipe.remove();  
+
+    $(event.target).after("<a href = '#'><i class='far fa-bookmark' onclick = 'bookmark(this)'></i></a>");
+    element.remove();
 }
 
 //ability to manually add recipe by url
@@ -152,14 +174,16 @@ cookbook.click( function (){
 
 //reveal editing
 edit.click( function(){
+	event.preventDefault();
 	$(".fas").toggleClass("hidden");
 });
 
 var deleteRecipe = function(recipe) {
 	$(".fas").click( function(){
+
+		var parentElementHelper = $(event.target).parent();
 		
 		//remove element from page
-		var parentElementHelper = $(event.target).parent();
 		parentElementHelper.remove();
 
 		//remove data from database
